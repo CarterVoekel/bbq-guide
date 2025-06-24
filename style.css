@@ -1,0 +1,108 @@
+/* --- Basic Setup & Mobile-First Design --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+.app-container {
+    max-width: 600px; /* Sets a max width for desktop viewing */
+    margin: auto; /* Centers the app on the screen */
+    background-color: #fff;
+    min-height: 100vh; /* Makes the white background fill the screen height */
+    box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Adds a subtle shadow */
+}
+
+/* --- Header Styling --- */
+.app-header {
+    background-color: #d73a31; /* A nice BBQ red */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+.app-header h1 { margin: 0; }
+.app-header p { margin: 5px 0 0 0; opacity: 0.9; }
+
+/* --- Main Content Area --- */
+.main-content {
+    padding: 20px;
+}
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+#food-input {
+    flex-grow: 1; /* Makes the input box take up the available space */
+    padding: 12px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+#search-button {
+    padding: 12px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: #333;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer; /* Changes the mouse to a pointer on hover */
+}
+
+/* --- Results Area Styling (Initially Hidden) --- */
+.hidden { display: none !important; }
+
+#results-container {
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 100px;
+}
+
+/* --- Ad Space --- */
+.ad-space {
+    margin: 20px;
+    padding: 30px 20px;
+    border: 2px dashed #ccc;
+    text-align: center;
+    color: #aaa;
+    font-weight: bold;
+    border-radius: 8px;
+}
+/* --- Loader Animation --- */
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3; /* Light grey circle */
+    border-top: 5px solid #d73a31; /* Red spinning part */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto; /* Centers the spinner */
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- Result Cards Styling --- */
+#results-content h2 { 
+    margin-top: 0; 
+    text-align: center;
+    margin-bottom: 20px;
+}
+.grill-type-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+}
+.grill-type-card h3 { 
+    margin: 0 0 10px 0; 
+    border-bottom: 2px solid #e9e9e9; 
+    padding-bottom: 8px; 
+    font-size: 1.2em;
+}
+.grill-type-card p { margin: 5px 0; line-height: 1.5; }
+.grill-type-card strong { color: #d73a31; }

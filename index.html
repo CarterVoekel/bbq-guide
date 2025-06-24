@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PWA Specific Meta Tags -->
+    <meta name="theme-color" content="#d73a31"/>
+    <link rel="manifest" href="manifest.json">
+
+    <title>AI BBQ Guide</title>
+
+    <!-- Link to our future CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <header class="app-header">
+            <h1>AI BBQ Guide</h1>
+            <p>Get instant cooking times & temps for any food on any grill.</p>
+        </header>
+
+        <main class="main-content">
+            <div class="search-form">
+                <input type="text" id="food-input" placeholder="e.g., '1-inch thick ribeye', 'pork shoulder'">
+                <button id="search-button">Get Grilling</button>
+            </div>
+
+            <div id="results-container" class="hidden">
+                <div class="loader"></div>
+                <div id="results-content">
+                    <!-- AI results will be injected here by JavaScript -->
+                </div>
+            </div>
+        </main>
+        
+        <div class="ad-space">
+            AD SPACE
+        </div>
+    </div>
+
+    <!-- Link to our future JavaScript file -->
+    <script src="script.js" defer></script>
+</body>
+</html>
