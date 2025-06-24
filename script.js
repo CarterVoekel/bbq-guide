@@ -1,4 +1,4 @@
-// Get references to our HTML elements so we can work with them
+// Get references to our HTML elements
 const searchButton = document.getElementById('search-button');
 const foodInput = document.getElementById('food-input');
 const resultsContainer = document.getElementById('results-container');
@@ -6,67 +6,52 @@ const resultsContent = document.getElementById('results-content');
 const loader = document.querySelector('.loader');
 
 // Add a 'click' event listener to the search button
-searchButton.addEventListener('click', () => {
+searchButton.addEventListener('click', async () => {
     const query = foodInput.value.trim();
     if (query === "") {
         alert("Please enter a food to search for.");
         return;
     }
 
-    // --- Show the loading state ---
+    // Show the loading state
     resultsContainer.classList.remove('hidden');
     loader.classList.remove('hidden');
-    resultsContent.innerHTML = ''; // Clear any previous results
+    resultsContent.innerHTML = '';
 
-    // --- Simulate fetching data from our AI ---
-    // We'll replace this with a real AI call later
-    getMockData(query); 
+    try {
+        // --- THIS IS THE NEW PART: Calling our live AI function ---
+        const response = await fetch('/.netlify/functions/getBbqTimes', {
+            method: 'POST',
+            body: JSON.stringify({ foodQuery: query })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
+
+        // The AI sends back a string of JSON, so we need to parse it
+        const data = JSON.parse(await response.text());
+        
+        // Hide the loader and render the real AI data
+        loader.classList.add('hidden');
+        renderResults(data);
+
+    } catch (error) {
+        console.error("Error fetching AI data:", error);
+        loader.classList.add('hidden');
+        resultsContent.innerHTML = `<p>Sorry, something went wrong. The grill master might be busy. Please try again.</p>`;
+    }
 });
 
-// ** MOCK FUNCTION - Simulates a real AI response for testing the UI **
-function getMockData(query) {
-    console.log("Simulating AI search for:", query);
-    
-    // This is a fake delay to make the loading spinner visible
-    setTimeout(() => { 
-        // Hide the loader
-        loader.classList.add('hidden');
-
-        // Create a fake data object, just like a real AI would send back
-        const mockData = {
-            food_name: "1-inch Thick Ribeye Steak",
-            recommendations: [
-                {
-                    grill_type: "Gas Grill",
-                    temperature: "450-500°F (High)",
-                    time: "4-6 minutes per side",
-                    notes: "For medium-rare. Let it rest for 5-10 minutes before slicing."
-                },
-                {
-                    grill_type: "Charcoal Grill",
-                    temperature: "High heat (two-zone fire)",
-                    time: "3-5 minutes per side",
-                    notes: "Sear on the hot side, move to the cool side if flare-ups occur."
-                },
-                {
-                    grill_type: "Pellet Grill (Smoker)",
-                    temperature: "225°F then 500°F",
-                    time: "45-60 min (smoke), 1 min per side (sear)",
-                    notes: "Perfect for a 'reverse sear' method to add smoky flavor."
-                }
-            ]
-        };
-        
-        // Send the fake data to our function that builds the HTML
-        renderResults(mockData);
-
-    }, 1500); // 1500 milliseconds = 1.5 seconds
-}
-
-// This function takes the data and builds the HTML to display it
+// This function takes the AI data and builds the HTML to display it
 function renderResults(data) {
-    let html = `<h2>${data.food_name}</h2>`;
+    // Check if the AI returned a valid response
+    if (!data || !data.food_name || !data.recommendations) {
+        resultsContent.innerHTML = `<p>Sorry, I couldn't get a recommendation for that. Try being more specific, like "1-inch thick pork chop".</p>`;
+        return;
+    }
 
+    let html = `<h2>${data.food_name}</h2>`;
     data.recommendations.forEach(rec => {
         html += `
             <div class="grill-type-card">
@@ -77,21 +62,19 @@ function renderResults(data) {
             </div>
         `;
     });
-
     resultsContent.innerHTML = html;
 }
-// --- PWA Service Worker Registration ---
 
-// Check if the browser supports service workers
+
+// --- PWA Service Worker Registration ---
 if ('serviceWorker' in navigator) {
-    // Register our service worker file when the window loads
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(registration => {
-          console.log('Service Worker registered! Scope: ', registration.scope);
-        })
-        .catch(err => {
-          console.log('Service Worker registration failed: ', err);
-        });
-    });
-  }
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('Service Worker registered! Scope: ', registration.scope);
+      })
+      .catch(err => {
+        console.log('Service Worker registration failed: ', err);
+      });
+  });
+}
