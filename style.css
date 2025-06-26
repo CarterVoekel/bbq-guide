@@ -22,7 +22,7 @@ body {
 }
 .app-header h1 { 
     margin: 0;
-    font-family: 'Bungee Shade', sans-serif; /* Use the INLINE font */
+    font-family: 'Bungee Inline', sans-serif; /* Use the INLINE font */
     font-size: 3em;
     line-height: 1.1;
     color: white; /* The color of the inline part */
