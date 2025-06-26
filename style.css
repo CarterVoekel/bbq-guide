@@ -23,7 +23,7 @@ body {
 .app-header h1 { 
     margin: 0;
     font-family: 'Bungee Inline', sans-serif; /* Use the INLINE font */
-    font-size: 3em; /* Make it a little larger */
+    font-size: 3em;
     line-height: 1.1;
     color: white; /* The color of the inline part */
     /* This creates the 3D shadow by stacking sharp shadows */
@@ -32,8 +32,6 @@ body {
         2px 2px 0 #333,
         3px 3px 0 #333,
         4px 4px 0 #333;
-; /* Adds a subtle shadow */
-    line-height: 1.1; /* Adjust spacing for the new font */
 }
 .app-header p { 
     margin: 10px 0 0 0; /* A little more space from the title */
