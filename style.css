@@ -17,12 +17,21 @@ body {
 .app-header {
     background-color: #d73a31; /* A nice BBQ red */
     color: white;
-    padding: 20px;
+    padding: 20px 20px 25px 20px; /* Added a bit more padding at the bottom */
     text-align: center;
 }
-.app-header h1 { margin: 0; }
-.app-header p { margin: 5px 0 0 0; opacity: 0.9; }
-
+.app-header h1 { 
+    margin: 0;
+    font-family: 'Bungee Shade', sans-serif; /* Our new BBQ font */
+    font-size: 2.8em; /* Bungee Shade looks great when it's big */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Adds a subtle shadow */
+    line-height: 1.1; /* Adjust spacing for the new font */
+}
+.app-header p { 
+    margin: 10px 0 0 0; /* A little more space from the title */
+    opacity: 0.9;
+    font-size: 0.9em;
+}
 /* --- Main Content Area --- */
 .main-content {
     padding: 20px;
@@ -90,6 +99,9 @@ body {
     margin-top: 0; 
     text-align: center;
     margin-bottom: 20px;
+    font-family: 'Bungee Shade', sans-serif; /* Use the new font here too */
+    font-size: 2.5em; /* Make this one big as well */
+    color: #333; /* Make it dark for readability on the white background */
 }
 .grill-type-card {
     background-color: #f9f9f9;
