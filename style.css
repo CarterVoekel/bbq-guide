@@ -22,12 +22,17 @@ body {
 }
 .app-header h1 { 
     margin: 0;
-    font-family: 'Bungee Shade', sans-serif; /* Our new BBQ font */
-    font-size: 3em; /* Bungee Shade looks great when it's big */
-    text-shadow: 1px 1px 0 #333,
-    2px 2px 0 #333,
-    3px 3px 0 #333,
-    4px 4px 0 #333; rgba(0,0,0,0.2); /* Adds a subtle shadow */
+    font-family: 'Bungee Inline', sans-serif; /* Use the INLINE font */
+    font-size: 3em; /* Make it a little larger */
+    line-height: 1.1;
+    color: white; /* The color of the inline part */
+    /* This creates the 3D shadow by stacking sharp shadows */
+    text-shadow: 
+        1px 1px 0 #333,
+        2px 2px 0 #333,
+        3px 3px 0 #333,
+        4px 4px 0 #333;
+; /* Adds a subtle shadow */
     line-height: 1.1; /* Adjust spacing for the new font */
 }
 .app-header p { 
